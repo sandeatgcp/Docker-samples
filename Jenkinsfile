@@ -20,7 +20,7 @@ node {
   def check = sh script: "kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'", returnStdout: true
   echo "${check}"
    // script {
-	  if (feSvcName == "${check}") {
+	  if ("${feSvcName} == "${check}") {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
