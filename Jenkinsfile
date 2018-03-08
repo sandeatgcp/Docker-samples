@@ -1,7 +1,7 @@
 node {
-  def project = 'REPLACE_WITH_YOUR_PROJECT_ID'
-  def appName = 'gceme'
-  def feSvcName = "${appName}-frontend"
+  def project =`gcloud config get-value project -q` 
+  def appName = 'apache-app'
+  def feSvcName = "my${appName}"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
   checkout scm
@@ -16,7 +16,7 @@ node {
   sh("gcloud docker -- push ${imageTag}")
 
   stage "Deploy Application"
-        sh("kubectl --namespace=production apply -f k8s/canary/")
-        sh("echo http://`kubectl --namespace=production get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
-        echo 'To access your environment run `kubectl proxy`'
+        sh("kubectl run  ${feSvcName} --image=$imagetag --port 80") 
+        sh("kubectl expose deployment ${feSvcName} --type=LoadBalancer --port=8080 --target-port=80")
+        echo 'To access your environment run `kubectl get svc`'
   }
