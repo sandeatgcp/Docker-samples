@@ -17,7 +17,6 @@ node {
   sh("gcloud docker -- push ${imageTag}")
 
   stage ('Deploy Application') {
-<<<<<<< HEAD
   check = sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print $1}'")
     script {
         if (check == ${feSvcName}) {
@@ -30,12 +29,3 @@ node {
       }
   }
   }
-
-
-=======
-    sh("kubectl run  ${feSvcName} --image=${imageTag} --port 80") 
-        sh("kubectl expose deployment ${feSvcName} --type=LoadBalancer --port=8080 --target-port=80")
-        echo 'To access your environment run `kubectl get svc`'
-  }
-  }
->>>>>>> abe497d29ad78e94a5772cc3473a39dc2cdb2009
