@@ -15,8 +15,9 @@ node {
   stage 'Push image to registry'
   sh("gcloud docker -- push ${imageTag}")
 
-  stage "Deploy Application"
+  stage 'Deploy Application' {
         sh("kubectl run  ${feSvcName} --image=$imagetag --port 80") 
         sh("kubectl expose deployment ${feSvcName} --type=LoadBalancer --port=8080 --target-port=80")
         echo 'To access your environment run `kubectl get svc`'
+  }
   }
