@@ -3,7 +3,7 @@ node {
   def appName = 'apache-app'
   def feSvcName = "my${appName}"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-  def mydep = sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")
+  def mydep = `"kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'"`
 
   checkout scm
 
