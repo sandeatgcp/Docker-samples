@@ -10,7 +10,7 @@ node {
   sh("docker build -t ${imageTag} .")
 
   stage 'Run Go tests'
-  sh("docker run ${imageTag} go test")
+  sh("docker run ${feSvcName} --image=${imageTag}")
 
   stage 'Push image to registry'
   sh("gcloud docker -- push ${imageTag}")
