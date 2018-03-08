@@ -17,7 +17,7 @@ node {
   sh("gcloud docker -- push ${imageTag}")
 
   stage ('Deploy Application') {
-  check = sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")
+  check = "\sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")"
 	  echo "${check}"
    // script {
 	  if ('${check}' == '${feSvcName}') {
