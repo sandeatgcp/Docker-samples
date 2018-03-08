@@ -18,7 +18,7 @@ node {
 
   stage ('Deploy Application') {
   check = sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")
-	  echo '\${check}'
+	  echo "${check}"
    // script {
 	  if ('${check}' == '${feSvcName}') {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
