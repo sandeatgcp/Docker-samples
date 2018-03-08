@@ -3,7 +3,6 @@ node {
   def appName = 'apache-app'
   def feSvcName = "my${appName}"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-  // def check = sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print $1}'")
 
   checkout scm
 
@@ -17,10 +16,10 @@ node {
   sh("gcloud docker -- push ${imageTag}")
 
   stage ('Deploy Application') {
-  check = "sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")"
-	  echo "${check}"
+  //check = "sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")"
+	  //echo "${check}"
    // script {
-	  if (check == '${feSvcName}') {
+	  if (feSvcName == "my${appName}") {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
