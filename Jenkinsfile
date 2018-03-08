@@ -18,7 +18,7 @@ node {
 
   stage ('Deploy Application') {
   check = sh("kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'")
-    script {
+   // script {
         if (check == ${feSvcName}) {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
@@ -27,6 +27,6 @@ node {
     sh("kubectl expose deployment ${feSvcName} --type=LoadBalancer --port=8080 --target-port=80")
     echo 'To access your environment run `kubectl get svc`'
       }
-  }
+//  }
   }
 }
