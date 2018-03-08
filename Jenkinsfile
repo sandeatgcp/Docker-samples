@@ -1,5 +1,5 @@
 node {
-  def project = `gcloud config get-value project -q` 
+  def project = 'myjenkinspro'
   def appName = 'apache-app'
   def feSvcName = "my${appName}"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
