@@ -24,7 +24,7 @@ node {
 	//  #!/bin/bash
    // script {
 	//  if ( xyz.toUpperCase() == abc.toUppercase() ) {
-	  if ( xyz == ' ' ) {
+	  if ( "${xyz}" == ' ' ) {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
