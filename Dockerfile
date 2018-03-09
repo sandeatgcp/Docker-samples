@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN apt-get install -y apache2
 
 # Install apache2 and write “welcome to my container” message
-RUN echo " Welcome to my container... Jenkins rolling update!" > /var/www/index.html
+RUN echo " Welcome to my container... Jenkins updated your application with new version" > /var/www/index.html
 
 # Configure Apache
 RUN a2enmod rewrite
