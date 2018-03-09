@@ -22,7 +22,7 @@ node {
 	  echo "my${appName}"
 	//  #!/bin/bash
    // script {
-	  if ((echo "${check}") == (echo "my${appName}")) {
+	  if (echo "${check}" == echo "my${appName}") {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
