@@ -1,3 +1,4 @@
+#!/bin/bash
 node {
   def project = 'myjenkinspro'
   def appName = 'apache-app'
