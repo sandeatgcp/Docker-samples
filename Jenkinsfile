@@ -19,6 +19,7 @@ node {
   stage ('Deploy Application') {
   def check = sh script: "kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'", returnStdout: true
   echo "${check}"
+	  echo "my${appName}"
 	//  #!/bin/bash
    // script {
 	  if (check == "my${appName}") {
