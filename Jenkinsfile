@@ -3,7 +3,7 @@ node {
   def appName = 'apache-app'
   def feSvcName = "my${appName}"
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
-  def check = sh script: "kubectl get deployment --namespace jenkins|grep ${feSvcName}|awk '{print \$1}'", returnStdout: true
+  // def check = sh script: "kubectl get deployment --namespace jenkins|grep ${feSvcName}|awk '{print \$1}'", returnStdout: true
  
 
   checkout scm
@@ -18,13 +18,13 @@ node {
   sh("gcloud docker -- push ${imageTag}")
 
   stage ('Deploy Application') {
-  // def check = sh script: "kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'", returnStdout: true
-  String xyz = echo "${check}"
-  String abc = echo "my${appName}"
+  def check = sh script: "kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'", returnStdout: true
+ // String xyz = echo "${check}"
+  // String abc = echo "my${appName}"
 	//  #!/bin/bash
    // sh script: {
 	//  if ( xyz.toUpperCase() == abc.toUppercase() ) {
-	  if (xyz) {
+	  if (check) {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
