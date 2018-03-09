@@ -1,4 +1,3 @@
-#!/bin/bash
 node {
   def project = 'myjenkinspro'
   def appName = 'apache-app'
@@ -24,7 +23,7 @@ node {
   String abc = echo "my${appName}"
 	//  #!/bin/bash
    // script {
-	  if [ ${xyz} == ${abc}] {
+	  if ( xyz.toUpperCase() == abc.toUppercase() ) {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
