@@ -22,9 +22,9 @@ node {
   String xyz = echo "${check}"
   String abc = echo "my${appName}"
 	//  #!/bin/bash
-   sh script: {
+   // sh script: {
 	//  if ( xyz.toUpperCase() == abc.toUppercase() ) {
-	  if ( xyz == ' ' ) {
+	  if (xyz) {
         sh("kubectl set image deployment/${feSvcName} ${feSvcName}=${imageTag}")
 	echo 'Successfully updated the deployment'
            } else {
@@ -32,6 +32,6 @@ node {
     sh("kubectl expose deployment ${feSvcName} --type=LoadBalancer --port=8080 --target-port=80")
     echo 'To access your environment run `kubectl get svc`'
       }
- }
+// }
   }
 }
