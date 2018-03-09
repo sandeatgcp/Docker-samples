@@ -1,7 +1,7 @@
 node {
   def project = 'myjenkinspro'
   def appName = 'apache-app'
-  def feSvcName = "my${appName}, trim: true"
+  def feSvcName = string("my${appName}", trim: true)
   def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
   def check = sh script: "kubectl get deployment --namespace jenkins|grep myapache-app|awk '{print \$1}'", trim: true, returnStdout: true
  
