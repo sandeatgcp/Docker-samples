@@ -11,7 +11,7 @@ node {
   stage 'Build image'
   sh("docker build -t ${imageTag} .")
 
-  stage 'Run Go tests'
+  stage 'Run tests'
   sh("docker images")
 
   stage 'Push image to registry'
