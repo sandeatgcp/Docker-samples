@@ -7,10 +7,7 @@ node {
  
 
   checkout scm
-  stage('Initialize'){
-        def dockerHome = tool 'Docker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    } 
+ 
   stage 'Build image'  
   sh("docker build -t ${imageTag} .")
 
