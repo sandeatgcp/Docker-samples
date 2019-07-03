@@ -7,7 +7,7 @@ node {
  
 
   checkout scm
-  agent { label 'docker-slave' }
+ 
   stage 'Build image'
   sh("docker build -t ${imageTag} .")
 
